@@ -1,25 +1,19 @@
 from datetime import datetime
 
-week_day_birthday = {'Monday:': [],
-                     'Tuesday:': [],
-                     'Wednesday:': [],
-                     'Thursday:': [],
-                     'Friday:': []
+week_day_birthday = {'Monday': [],
+                     'Tuesday': [],
+                     'Wednesday': [],
+                     'Thursday': [],
+                     'Friday': []
                      }
 
 
 def sort_user_birthday(user, date):
-    week_day = date.weekday()
-    if week_day == 1:
-        week_day_birthday['Tuesday:'].append(user)
-    elif week_day == 2:
-        week_day_birthday['Wednesday:'].append(user)
-    elif week_day == 3:
-        week_day_birthday['Thursday:'].append(user)
-    elif week_day == 4:
-        week_day_birthday['Friday:'].append(user)
+    week_day = datetime.strftime(date, '%A')
+    if week_day not in week_day_birthday.keys():
+        week_day_birthday['Monday'].append(user)
     else:
-        week_day_birthday['Monday:'].append(user)
+        week_day_birthday[week_day].append(user)
 
 
 def congratulations_day(user_list):
@@ -32,12 +26,11 @@ def congratulations_day(user_list):
 
 def print_info(user_dict):
     for key, value in user_dict.items():
-        day = key
         user = ', '.join(value)
-        print(f'{day} {user}')
+        print(f'{key}: {user}')
 
 
-test = [{'Nic': '21.08.2002', 'Karl': '24.08.2002'}]
+test = [{'Nic': '21.08.2002'}, {'Karl': '24.08.2002'}, {'Zina': '27.08.2002'}, {'Kris': '27.08.2002'}]
 
 
 if __name__ == '__main__':
